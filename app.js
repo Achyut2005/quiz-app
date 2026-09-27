@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-
+const questions = require("./data/questions");
 const app = express();
 
 app.set("view engine", "ejs");
@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
+});
+
+app.get("/quiz", (req, res) => {
+  res.json(questions);
 });
 
 module.exports = app;
