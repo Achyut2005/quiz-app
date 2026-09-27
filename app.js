@@ -14,4 +14,8 @@ app.get("/", (req, res) => {
   res.send("QuizMaster is running!");
 });
 
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
 module.exports = app;
