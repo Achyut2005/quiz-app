@@ -11,7 +11,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send("QuizMaster is running!");
+  const questionCount = questions.length;
+  const categories = [...new Set(questions.map((question) => question.category))];
+
+  res.render("index", {
+    questionCount,
+    categories
+  });
 });
 
 app.get("/health", (req, res) => {

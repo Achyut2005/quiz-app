@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMaster</title>
+</head>
+<body>
+  <main>
+    <h1>QuizMaster</h1>
+
+    <p>Test your Cloud Computing and DevOps knowledge.</p>
+
+    <p>
+      This quiz currently contains
+      <strong><%= questionCount %></strong>
+      questions.
+    </p>
+
+    <p>
+      Categories:
+      <strong><%= categories.join(", ") %></strong>
+    </p>
+
+    <a href="/quiz">Start Quiz</a>
+  </main>
+</body>
+</html>
