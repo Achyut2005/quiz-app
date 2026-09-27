@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMaster</title>
+</head>
+<body>
+  <main>
+    <h1>QuizMaster</h1>
+    <p>Test your Cloud Computing and DevOps knowledge.</p>
+
+    <form action="/quiz/submit" method="POST">
+      <% questions.forEach((question) => { %>
+        <fieldset>
+          <legend>
+            <%= question.id %>. <%= question.question %>
+          </legend>
+
+          <% question.options.forEach((option) => { %>
+            <label>
+              <input
+                type="radio"
+                name="question_<%= question.id %>"
+                value="<%= option %>"
+                required
+              >
+              <%= option %>
+            </label>
+            <br>
+          <% }); %>
+        </fieldset>
+        <br>
+      <% }); %>
+
+      <button type="submit">Submit Quiz</button>
+    </form>
+  </main>
+</body>
+</html>

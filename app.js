@@ -19,7 +19,7 @@ app.get("/health", (req, res) => {
 });
 
 app.get("/quiz", (req, res) => {
-  res.json(questions);
+  res.render("quiz", { questions });
 });
 
 module.exports = app;
