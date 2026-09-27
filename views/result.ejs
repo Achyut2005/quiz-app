@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result - QuizMaster</title>
+</head>
+<body>
+  <main>
+    <h1>Quiz Complete!</h1>
+
+    <p>Your score:</p>
+
+    <h2><%= score %> / <%= total %></h2>
+
+    <p>
+      You answered
+      <strong><%= correct %></strong>
+      questions correctly.
+    </p>
+
+    <a href="/quiz">Try Again</a>
+    <br>
+    <a href="/">Back to Home</a>
+  </main>
+</body>
+</html>

@@ -28,4 +28,30 @@ app.get("/quiz", (req, res) => {
   res.render("quiz", { questions });
 });
 
+app.post("/quiz/submit", (req, res) => {
+  let score = 0;
+
+  for (const question of questions) {
+    const submittedAnswer = req.body[`question_${question.id}`];
+
+    if (!submittedAnswer) {
+      return res.status(400).send("Please answer all questions.");
+    }
+
+    if (!question.options.includes(submittedAnswer)) {
+      return res.status(400).send("Invalid answer submitted.");
+    }
+
+    if (submittedAnswer === question.answer) {
+      score++;
+    }
+  }
+
+  res.render("result", {
+    score,
+    correct: score,
+    total: questions.length
+  });
+});
+
 module.exports = app;
