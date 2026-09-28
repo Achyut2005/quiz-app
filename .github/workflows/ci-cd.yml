@@ -71,7 +71,7 @@ jobs:
         run: |
           for i in {1..10}; do
             if curl --fail --silent \
-              https://quiz-app-y7fu.onrender.com/health \
+              ${{ secrets.RENDER_SERVICE_URL }}/health \
               | grep -q '"status":"ok"'; then
               echo "Health check passed."
               exit 0
@@ -87,7 +87,7 @@ jobs:
       - name: Check live quiz page
         run: |
           curl --fail --silent \
-            https://quiz-app-y7fu.onrender.com/quiz \
+            ${{ secrets.RENDER_SERVICE_URL }}/quiz \
             > /tmp/quiz.html
 
           grep -q "Quiz" /tmp/quiz.html
