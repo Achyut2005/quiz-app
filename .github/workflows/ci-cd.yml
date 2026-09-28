@@ -53,4 +53,43 @@ jobs:
 
     steps:
       - name: Trigger Render deployment
-        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+        run: |
+          curl --fail-with-body -X POST \
+            "${{ secrets.RENDER_DEPLOY_HOOK }}&ref=${{ github.sha }}"
+
+  verify:
+    name: Verify Live Application
+    needs: deploy
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for Render deployment
+        run: sleep 30
+
+      - name: Check health endpoint
+        run: |
+          for i in {1..10}; do
+            if curl --fail --silent \
+              https://quiz-app-y7fu.onrender.com/health \
+              | grep -q '"status":"ok"'; then
+              echo "Health check passed."
+              exit 0
+            fi
+
+            echo "Application not ready yet. Waiting..."
+            sleep 15
+          done
+
+          echo "Health check failed."
+          exit 1
+
+      - name: Check live quiz page
+        run: |
+          curl --fail --silent \
+            https://quiz-app-y7fu.onrender.com/quiz \
+            > /tmp/quiz.html
+
+          grep -q "Quiz" /tmp/quiz.html
+
+          echo "Quiz page check passed."
