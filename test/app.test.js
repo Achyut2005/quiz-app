@@ -52,7 +52,7 @@ test("GET /health returns status ok", async () => {
   const response = await makeRequest("GET", "/health");
 
   assert.strictEqual(response.statusCode, 200);
-  assert.strictEqual(response.body, '{"status":"failed"}');
+  assert.strictEqual(response.body, '{"status":"ok"}');
 });
 
 test("GET /api/questions returns quiz questions", async () => {
